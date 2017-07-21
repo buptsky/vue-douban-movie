@@ -2,6 +2,7 @@
 
 > 仿豆瓣电影webapp
 
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/movie-show.gif)
 ![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/detail.gif)
 
 ## Build Setup
