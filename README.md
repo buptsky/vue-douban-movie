@@ -1,9 +1,32 @@
-# douban-movie-hx
+# vue2.0 豆瓣电影WebApp
 
-> 仿豆瓣电影webapp
+## 项目简介
+
+使用vue2.0仿豆瓣电影app，根据豆瓣电影api对功能作了适当修改
+
+api来源自豆瓣官方api，详情请戳[豆瓣电影api](https://developers.douban.com/wiki/?title=movie_v2)
+
+## 部分效果演示
+### 上映电影信息和电影详情
 
 ![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/move-show.gif)
 ![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/detail.gif)
+
+
+
+### 排行和影人
+
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/rank.gif)
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/celebrity.gif)
+
+
+
+### 搜索和收藏
+
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/search.gif)
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/collect.gif)
+
+
 
 ## Build Setup
 
