@@ -32,7 +32,7 @@ npm run dev
 ## 部分效果演示
 ### 上映电影信息和电影详情
 
-![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/move-show.gif)
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/movie-show.gif)
 ![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/detail.gif)
 
 ### 排行和影人
