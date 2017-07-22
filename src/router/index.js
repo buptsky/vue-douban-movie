@@ -1,15 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import MovieShow from 'components/movie-show/movie-show';
-import Rank from 'components/rank/rank';
-import RankDetail from 'components/rank-detail/rank-detail';
-import UserCenter from 'components/user-center/user-center';
-import MovieDetail from 'components/movie-detail/movie-detail';
-import ReviewDetail from 'components/review-detail/review-detail';
-import AllDiscussion from 'components/all-discussion/all-discussion';
-import Search from 'components/search/search';
-import CelebrityDetail from 'components/celebrity-detail/celebrity-detail';
-import CelebrityWorks from 'components/celebrity-works/celebrity-works';
+
+const MovieShow = resolve => require(['components/movie-show/movie-show'], resolve);
+const Rank = resolve => require(['components/rank/rank'], resolve);
+const RankDetail = resolve => require(['components/rank-detail/rank-detail'], resolve);
+const UserCenter = resolve => require(['components/user-center/user-center'], resolve);
+const MovieDetail = resolve => require(['components/movie-detail/movie-detail'], resolve);
+const ReviewDetail = resolve => require(['components/review-detail/review-detail'], resolve);
+const AllDiscussion = resolve => require(['components/all-discussion/all-discussion'], resolve);
+const Search = resolve => require(['components/search/search'], resolve);
+const CelebrityDetail = resolve => require(['components/celebrity-detail/celebrity-detail'], resolve);
+const CelebrityWorks = resolve => require(['components/celebrity-works/celebrity-works'], resolve);
 
 Vue.use(Router);
 
