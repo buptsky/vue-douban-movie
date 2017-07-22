@@ -1,4 +1,5 @@
 <template>
+  <!--2017/7/22 优化-->
   <div ref="wrapper">
     <slot></slot>
   </div>
@@ -8,11 +9,11 @@
   import BScroll from 'better-scroll';
   export default {
     props: {
-      probeType: {
+      probeType: { // 派发滚动事件方式
         type: Number,
         default: 1
       },
-      click: {
+      click: { // 是否支持点击
         type: Boolean,
         default: true
       },
@@ -20,7 +21,7 @@
 //        type: Array,
         default: null
       },
-      scrollX: { // 滚动方向为x轴
+      scrollX: { // 设置滚动方向为x轴
         type: Boolean,
         default: false
       },
@@ -63,7 +64,6 @@
         });
         // 是否需要监听滚动事件
         if (this.listenScroll) {
-          // let me = this;
           this.scroll.on('scroll', (pos) => {
             this.$emit('scroll', pos);
           });
@@ -74,10 +74,9 @@
             if (this.scroll.y <= this.scroll.maxScrollY + 50) { // 快滚动到底部
               this.$emit('scrollToEnd'); // 派发事件说明已经滚动到底部
             }
-            // console.log(this.scroll.maxScrollY);
           });
         }
-
+        // 在触发滚动之前派发事件，这里主要用于用户体验优化
         if (this.beforeScroll) {
           this.scroll.on('beforeScrollStart', () => {
             this.$emit('beforeScroll');
@@ -102,8 +101,8 @@
 
     },
     watch: {
-      data() {
-        setTimeout(() => {
+      data() { // 可以手动设置更新延时，视情况而定
+        setTimeout(() => { // 重新计算滚动高度
           this.refresh();
         }, this.refreshDelay);
       }

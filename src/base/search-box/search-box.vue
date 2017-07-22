@@ -1,4 +1,5 @@
 <template>
+  <!--2017/7/22 优化-->
   <div class="search-box">
     <i class="icon-search"></i>
     <input type="text" class="box" :placeholder="placeholder" v-model="query" ref="query">
@@ -7,7 +8,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { debounce } from '../../common/js/util';
   export default {
     props: {
       placeholder: {
@@ -54,14 +54,7 @@
           this.$emit('query', newQuery);
         }
       }
-    },
-    created() {
-      // 节流操作
-//      this.$watch('query', debounce((newQuery) => {
-//        this.$emit('query', newQuery);
-//      }, 200));
     }
-
   };
 </script>
 

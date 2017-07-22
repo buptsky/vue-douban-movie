@@ -55,13 +55,13 @@
       selectItem(movie) {
         this.$emit('select', movie);
       },
-      dateEqual(index) {
+      dateEqual(index) { // 确定相邻两部电影日期是否一样，划分日期分组
         if (index === 0) {
           return false;
         }
         return this.movies[index].date === this.movies[index - 1].date;
       },
-      getMap() {
+      getMap() { // 根据日期创建电影分组
         let map = {};
         for (let i = 0; i < this.movies.length; i++) {
           if (map[this.movies[i].date]) {
@@ -71,7 +71,6 @@
           }
         }
         this.indexMap = map;
-        // console.log(map);
       },
       _calculateHeight() { // 计算每个区间的高度
         this.listHeight = [];
@@ -92,12 +91,11 @@
     watch: {
       movies() {
         if (this.needDate) {
-          setTimeout(() => {
+          setTimeout(() => { // 需要延迟来保证dom更新
             this.getMap();
             this._calculateHeight();
           }, 20);
         }
-        // console.log(this.movies);
       }
     },
     components: {

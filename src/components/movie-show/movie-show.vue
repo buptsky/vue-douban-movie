@@ -1,45 +1,49 @@
 <template>
-  <transition name="fade">
-    <div class="movie-show">
-      <div class="go-search" @click="goSearch">
-        <div class="logo">
-          <img src="./douban-logo.png" width="35" height="35">
-        </div>
-        <div class="search-content">
-          <span class="icon-search"></span>
-          <span>电影/影人/标签</span>
-        </div>
+  <div class="movie-show">
+    <div class="go-search" @click="goSearch">
+      <div class="logo">
+        <img src="./douban-logo.png" width="35" height="35">
       </div>
-      <switches :switches="switches" :currentIndex="currentIndex" @switch="switchItem"></switches>
-      <div class="list-wrapper">
-        <scroll v-show="currentIndex === 0" class="list-scroll" :data="hotMovies" :pullup="pullup" @scrollToEnd="loadMore" ref="hotMovies">
-          <div class="list-inner">
-            <movie-list :movies="hotMovies" :hasMore="hasMoreHotMovies" @select="selectMovie"></movie-list>
-          </div>
-        </scroll>
-        <scroll v-show="currentIndex === 1"
-                class="list-scroll"
-                :data="comingMovies"
-                :pullup="pullup"
-                :probeType="probeType"
-                :listenScroll="listenScroll"
-                @scroll="scroll"
-                @scrollToEnd="loadMore"
-                ref="comingMovies"
-        >
-          <div class="list-inner">
-            <movie-list :movies="comingMovies" :needDate="needDate" @getHeight="getHeight" @getMap="getMap" :hasMore="hasMoreComingMovies" @select="selectMovie"></movie-list>
-          </div>
-        </scroll>
-        <loadmore :fullScreen="fullScreen"
-                  v-show="currentIndex===1&&!comingMovies.length||currentIndex===0&&!hotMovies.length">
-        </loadmore>
-      </div>
-      <div v-show="currentIndex === 1" class="list-fixed" v-if="fixedTitle" ref="fixed">
-        <h1 class="fixed-title">{{fixedTitle}}</h1>
+      <div class="search-content">
+        <span class="icon-search"></span>
+        <span>电影/影人/标签</span>
       </div>
     </div>
-  </transition>
+    <switches :switches="switches" :currentIndex="currentIndex" @switch="switchItem"></switches>
+    <div class="list-wrapper">
+      <scroll v-show="currentIndex === 0"
+              class="list-scroll"
+              :data="hotMovies"
+              :pullup="pullup"
+              @scrollToEnd="loadMore"
+              ref="hotMovies"
+      >
+        <div class="list-inner">
+          <movie-list :movies="hotMovies" :hasMore="hasMoreHotMovies" @select="selectMovie"></movie-list>
+        </div>
+      </scroll>
+      <scroll v-show="currentIndex === 1"
+              class="list-scroll"
+              :data="comingMovies"
+              :pullup="pullup"
+              :probeType="probeType"
+              :listenScroll="listenScroll"
+              @scroll="scroll"
+              @scrollToEnd="loadMore"
+              ref="comingMovies"
+      >
+        <div class="list-inner">
+          <movie-list :movies="comingMovies" :needDate="needDate" @getHeight="getHeight" @getMap="getMap" :hasMore="hasMoreComingMovies" @select="selectMovie"></movie-list>
+        </div>
+      </scroll>
+      <loadmore :fullScreen="fullScreen"
+                v-show="currentIndex===1&&!comingMovies.length||currentIndex===0&&!hotMovies.length">
+      </loadmore>
+    </div>
+    <div v-show="currentIndex === 1" class="list-fixed" v-if="fixedTitle" ref="fixed">
+      <h1 class="fixed-title">{{fixedTitle}}</h1>
+    </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -50,8 +54,8 @@
   import { getMovie, getComingMovie } from '../../api/movie-show';
   import { createMovieList } from '../../common/js/movieList';
   import { mapMutations } from 'vuex';
-  const SEARCH_MORE = 10;
-  const TITLE_HEIGHT = 30;
+  const SEARCH_MORE = 10; // 每次请求数据的长度
+  const TITLE_HEIGHT = 30; // 日期栏高度
   export default {
     data() {
       return {
@@ -91,32 +95,30 @@
       }
     },
     methods: {
-      goSearch() {
+      goSearch() { // 转入搜索页
         this.$router.push({
           path: '/search'
         });
       },
-      selectMovie(movie) {
+      selectMovie(movie) { // 转入电影详情
+        this.setMovie(movie);
         this.$router.push({
           path: `/movie/${movie.id}`
         });
-        this.setMovie(movie);
       },
-      switchItem(index) {
+      switchItem(index) { // 切换tab栏
         this.currentIndex = index;
         // 第一次切换到即将上映选项卡后开始请求即将上映电影的数据
         if (index === 1 && !this.comingMovies.length) {
           getComingMovie(this.comingMovieIndex, SEARCH_MORE).then((res) => {
-            // 需要将数据转换为带有日期分组的形式
-            this.comingMovies = createMovieList(res.subjects);
+            this.comingMovies = createMovieList(res.subjects); // 格式化数据，创建包含电影类的数组
             this._checkMore(res); // 检查是否还存在更多数据
-            // console.log(res);
           });
         }
         if (index === 1) { // 重新载入之前的滚动位置
           this.$refs.comingMovies.scrollTo(0, this.scrollY);
         }
-        setTimeout(() => {
+        setTimeout(() => { // scroll组件计算高度，确保正确滚动
           this.$refs.comingMovies.refresh();
         }, 20);
       },
@@ -124,9 +126,9 @@
         if (!this.loadingFlag) { // 上一次加载还未完成时候，忽略此次事件
           return;
         }
-        this.loadingFlag = false;
+        this.loadingFlag = false; // 重置加载标志位
         if (this.currentIndex === 0) { // 加载更多上映信息
-          if (!this.hasMoreHotMovies) {
+          if (!this.hasMoreHotMovies) { // 不存在更多电影
             this.loadingFlag = true;
             return;
           }
@@ -143,24 +145,23 @@
           }
           this.comingMovieIndex += SEARCH_MORE;
           getComingMovie(this.comingMovieIndex, SEARCH_MORE).then((res) => {
-            // 需要将数据转换为带有日期分组的形式
             this.comingMovies = this.comingMovies.concat(createMovieList(res.subjects));
-            this._checkMore(res); // 检查是否还存在更多数据
+            this._checkMore(res);
             console.log(this.comingMovies);
             this.loadingFlag = true;
           });
         }
       },
-      scroll(pos) {
+      scroll(pos) { // 获取滚动位置
         this.scrollY = pos.y;
       },
-      getHeight(height) {
+      getHeight(height) { // 保存子组件传入的高度列表
         this.listHeight = height;
-        console.log(height);
+        // console.log(height);
       },
-      getMap(map) {
+      getMap(map) { // 保存子组件传入的日期索引
         this.scrollMap = map;
-        console.log(this.scrollMap);
+        // console.log(this.scrollMap);
       },
       _getMovie() { // 获取正在上映的电影
         getMovie(this.hotMovieIndex, SEARCH_MORE).then((res) => {
@@ -173,13 +174,11 @@
         const movies = data.subjects;
         if (!movies.length || data.start + data.count > data.total) {
           if (this.currentIndex === 0) {
-            console.log('a');
             this.hasMoreHotMovies = false;
-            this.loadingFlag = true;
           } else {
             this.hasMoreComingMovies = false;
-            this.loadingFlag = true;
           }
+          this.loadingFlag = true;
         }
       },
       ...mapMutations({
@@ -202,9 +201,7 @@
           let height2 = this.listHeight[i + 1];
           if (-newY >= height1 && -newY < height2) {
             this.scrollIndex = i;
-            // console.log(i);
             this.diff = height2 + newY;
-            // console.log(this.currentIndex);
             return;
           }
         }
@@ -217,7 +214,6 @@
           return;
         }
         this.fixedTop = fixedTop;
-        // console.log(this.$refs.fixed);
         this.$nextTick(() => {
           this.$refs.fixed.style.transform = `translate3d(0, ${fixedTop}px, 0)`;
         });
@@ -236,10 +232,6 @@
   @import "../../common/stylus/variable.styl"
   .movie-show
     height: 100%
-    &.fade-enter
-      opacity: 0
-    &.fade-enter-active
-      transiton: all 1s
     .go-search
       height: 50px
       box-sizing: border-box

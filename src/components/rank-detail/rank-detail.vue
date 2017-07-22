@@ -66,7 +66,7 @@
         smallFont: true, // tab栏目小字体
         pullup: true, // 支持滚动加载
         hasMore: [false, false, false, false, false], // 是否存在更多数据，仅针对top250
-        movieIndex: [0, 50, 100, 150, 200], // 每页其实序号
+        movieIndex: [0, 50, 100, 150, 200], // 每页起始索引
         scrollY: [0, 0, 0, 0, 0] // 每页滚动位置
       };
     },
