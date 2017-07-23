@@ -2,7 +2,7 @@
   <div class="review-wrapper">
     <div class="fixed-title">
       <span class="back" @click="back">
-        <i class="icon-arrow_lift"></i>
+        <i class="icon-back"></i>
       </span>
       <span class="type">影评</span>
     </div>
@@ -90,7 +90,7 @@
   @import "../../common/stylus/variable.styl"
   @import "../../common/stylus/mixin.styl"
   .fixed-title
-    border-bottom-1px(#ccc)
+    border-bottom-1px($color-line)
     position: fixed
     top: 0
     width: 100%
@@ -102,7 +102,7 @@
       top: 0px
       left: 6px
       z-index: 50
-      .icon-arrow_lift
+      .icon-back
         display: block
         padding: 15px
         font-size: $font-size-large
@@ -162,7 +162,7 @@
         height: 10px
         width: 60%
         .line
-          border-bottom-1px(#ccc)
+          border-bottom-1px($color-line)
         .text
           padding: 0 10px
           display: inline-block

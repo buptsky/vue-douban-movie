@@ -100,10 +100,10 @@
       box-sizing: border-box
       height: 130px
       padding: 15px
-      border: 1px solid #ccc
+      border: 1px solid $color-line
       &.compact
         border: 0
-        border-bottom-1px(#ccc)
+        border-bottom-1px($color-line)
       .info-img
         flex: 70px 0 0
         margin-right: 10px

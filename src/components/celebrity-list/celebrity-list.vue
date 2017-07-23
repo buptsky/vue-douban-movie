@@ -39,7 +39,7 @@
     box-sizing: border-box
     height: 130px
     padding: 15px
-    border-bottom-1px(#ccc)
+    border-bottom-1px($color-line)
     background: $color-background
     .image
       flex: 70px 0 0

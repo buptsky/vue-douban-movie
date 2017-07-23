@@ -2,7 +2,7 @@
   <div class="rank-wrapper">
     <div class="fixed-title">
       <span class="back" @click="back">
-        <i class="icon-arrow_lift"></i>
+        <i class="icon-back"></i>
       </span>
       <span class="type">
         <span>{{rankType}}</span>
@@ -193,7 +193,7 @@
     position: relative
     z-index: 10
     .fixed-title
-      border-bottom-1px(#ccc)
+      border-bottom-1px($color-line)
       position: fixed
       top: 0
       width: 100%
@@ -205,7 +205,7 @@
         top: 0px
         left: 6px
         z-index: 50
-        .icon-arrow_lift
+        .icon-back
           display: block
           padding: 15px
           font-size: $font-size-large

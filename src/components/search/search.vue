@@ -8,12 +8,12 @@
         v-show="!tagSearch">
       </search-box>
       <div class="fixed-title" v-show="tagSearch">
-      <span class="back" @click="back">
-        <i class="icon-arrow_lift"></i>
-      </span>
+        <span class="back" @click="back">
+          <i class="icon-back"></i>
+        </span>
         <span class="type">
-        <span>关于{{query}}的电影</span>
-      </span>
+          <span>关于{{query}}的电影</span>
+        </span>
       </div>
       <div class="shortcut-wrapper" v-show="!query">
         <scroll class="shortcut"
@@ -166,7 +166,7 @@
     &.fade-enter,&.fade-leave-to
       opacity: 0
     .fixed-title
-      border-bottom-1px(#ccc)
+      border-bottom-1px($color-line)
       position: fixed
       top: 0
       width: 100%
@@ -178,7 +178,7 @@
         top: 0px
         left: 6px
         z-index: 50
-        .icon-arrow_lift
+        .icon-back
           display: block
           padding: 15px
           font-size: $font-size-large
@@ -200,7 +200,7 @@
           padding: 0 15px
           width: 90%
           .tag
-            border-bottom-1px(#ccc)
+            border-bottom-1px($color-line)
             padding: 20px 0
             &:last-child
               border-bottom-1px($color-theme-f)

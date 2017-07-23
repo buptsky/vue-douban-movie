@@ -282,15 +282,15 @@
         border-radius: 5px
         margin-right: 20px
         &.wanted
-          border: 1px solid #FE9800
-          color: #FE9800
+          border: 1px solid $color-collect
+          color: $color-collect
       .has-watched
         flex: 2
         border: 1px solid $color-theme-f
         border-radius: 5px
         &.watched
-          border: 1px solid #FE9800
-          color: #FE9800
+          border: 1px solid $color-collect
+          color: $color-collect
           img
             display: inline-block
             vertical-align: middle
@@ -302,7 +302,7 @@
       white-space: nowrap
       overflow: hidden
       font-size: 0
-      border-bottom-1px(#ccc)
+      border-bottom-1px($color-line)
       .casts-content
         .title
           font-size: $font-size-small

@@ -3,7 +3,7 @@
   <div class="detail-wrapper">
     <div class="fixed-title">
       <span class="back" @click="back">
-        <i class="icon-arrow_lift"></i>
+        <i class="icon-back"></i>
       </span>
       <span class="type" ref="fixed">
         <span class="icon" v-show="!this.changeFix">
@@ -193,7 +193,7 @@
         top: 0px
         left: 6px
         z-index: 50
-        .icon-arrow_lift
+        .icon-back
           display: block
           padding: 10px
           font-size: $font-size-large

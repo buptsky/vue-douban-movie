@@ -2,7 +2,7 @@
   <div class="detail-wrapper">
     <div class="fixed-title">
       <span class="back" @click="back">
-        <i class="icon-arrow_lift"></i>
+        <i class="icon-back"></i>
       </span>
       <span class="type" ref="fixed">
         影人
@@ -207,7 +207,7 @@
         top: 0px
         left: 6px
         z-index: 50
-        .icon-arrow_lift
+        .icon-back
           display: block
           padding: 11px
           font-size: $font-size-large
@@ -255,12 +255,12 @@
             border: 1px solid $color-theme-f
             border-radius: 10px
             &.has-collected
-              border: 1px solid #FE9800
-              color: #FE9800
+              border: 1px solid $color-collect
+              color: $color-collect
               .icon
-                color: #FE9800
+                color: $color-collect
               .text
-                color: #FE9800
+                color: $color-collect
             .icon
               display: inline-block
               vertical-align: middle
