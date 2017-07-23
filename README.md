@@ -10,15 +10,19 @@ api来源自豆瓣官方api，详情请戳[豆瓣电影api](https://developers.d
 
 ## 线上体验
 
-PC访问
+#### PC访问
 
-[豆瓣电影]（http://59.110.140.119:8080)，打开浏览器进入开发者模式，选择移动端视口
+[豆瓣电影webapp](http://59.110.140.119:8080)
+
+打开浏览器进入开发者模式，选择移动端视口
 
 chrome浏览器下的iphone5/6/6 plus体验效果更佳
 
-移动端访问
+#### 移动端访问
 
 扫描下方二维码
+
+![image](https://github.com/buptsky/vue-douban-movie/raw/master/screenshots/qrcode.png)
 
 或者用手机浏览器打开上面的地址，全屏访问效果更好
 
