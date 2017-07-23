@@ -33,7 +33,7 @@
               ref="comingMovies"
       >
         <div class="list-inner">
-          <movie-list :movies="comingMovies" :needDate="needDate" @getHeight="getHeight" @getMap="getMap" :hasMore="hasMoreComingMovies" @select="selectMovie"></movie-list>
+          <movie-list :movies="comingMovies" :needDate="needDate" @getHeight="getHeight" @getMap="getMap" :hasMore="hasMoreComingMovies" @select="selectMovie" ref="list"></movie-list>
         </div>
       </scroll>
       <loadmore :fullScreen="fullScreen"
@@ -108,6 +108,9 @@
       },
       switchItem(index) { // 切换tab栏
         this.currentIndex = index;
+        if (index === 1) { // 重新计算各个区间高度
+          this.$refs.list.recalculate();
+        }
         // 第一次切换到即将上映选项卡后开始请求即将上映电影的数据
         if (index === 1 && !this.comingMovies.length) {
           getComingMovie(this.comingMovieIndex, SEARCH_MORE).then((res) => {
@@ -153,15 +156,16 @@
         }
       },
       scroll(pos) { // 获取滚动位置
+        console.log(pos);
         this.scrollY = pos.y;
       },
       getHeight(height) { // 保存子组件传入的高度列表
         this.listHeight = height;
-        // console.log(height);
+        console.log(height);
       },
       getMap(map) { // 保存子组件传入的日期索引
         this.scrollMap = map;
-        // console.log(this.scrollMap);
+        console.log(this.scrollMap);
       },
       _getMovie() { // 获取正在上映的电影
         getMovie(this.hotMovieIndex, SEARCH_MORE).then((res) => {
@@ -186,7 +190,10 @@
       })
     },
     watch: {
-      scrollY(newY) {
+      scrollY(newY, oldY) {
+        if (!newY) { // 如果在快速滚动时切换tab栏，滚动位置会读取错误，这里保留出错前正确的滚动位置
+          this.scrollY = oldY;
+        }
         if (this.listHeight.length === 0 || this.scrollMap.length === 0) { // 若还未获取到高度则返回
           return;
         }

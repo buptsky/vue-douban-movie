@@ -61,6 +61,12 @@
         }
         return this.movies[index].date === this.movies[index - 1].date;
       },
+      recalculate() { // 重新计算各个区域高度，防止用户在发起新数据请求后切换选项卡无法正确获取高度
+        setTimeout(() => { // 需要延迟来保证dom更新
+          this.getMap();
+          this._calculateHeight();
+        }, 20);
+      },
       getMap() { // 根据日期创建电影分组
         let map = {};
         for (let i = 0; i < this.movies.length; i++) {
