@@ -20,7 +20,8 @@ extend-click()
     left: -10px
     right: -10px
     bottom: -10px
-
+    
+// 实现1px细线
 border-top-1px($color)
   position: relative
   &:after
@@ -32,8 +33,9 @@ border-top-1px($color)
     width: 200%;
     content: ''
     transform-origin: 0 0
-    -webkit-transform: scale(0.5)
+    -webkit-transform-origin: 0 0
     transform: scale(0.5)
+    -webkit-transform: scale(0.5)
 
 border-bottom-1px($color)
   position: relative
@@ -46,6 +48,6 @@ border-bottom-1px($color)
     width: 200%;
     content: ''
     transform-origin: 0 0
-    -webkit-transform: scale(0.5)
+    -webkit-transform-origin: 0 0
     transform: scale(0.5)
-
+    -webkit-transform: scale(0.5)
