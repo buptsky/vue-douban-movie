@@ -123,6 +123,7 @@
         }
         setTimeout(() => { // scroll组件计算高度，确保正确滚动
           this.$refs.comingMovies.refresh();
+          this.$refs.hotMovies.refresh();
         }, 20);
       },
       loadMore() { // 加载更多数据
@@ -150,7 +151,7 @@
           getComingMovie(this.comingMovieIndex, SEARCH_MORE).then((res) => {
             this.comingMovies = this.comingMovies.concat(createMovieList(res.subjects));
             this._checkMore(res);
-            console.log(this.comingMovies);
+            // console.log(this.comingMovies);
             this.loadingFlag = true;
           });
         }
