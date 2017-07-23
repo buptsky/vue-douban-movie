@@ -156,16 +156,16 @@
         }
       },
       scroll(pos) { // 获取滚动位置
-        console.log(pos);
+        // console.log(pos);
         this.scrollY = pos.y;
       },
       getHeight(height) { // 保存子组件传入的高度列表
         this.listHeight = height;
-        console.log(height);
+        // console.log(height);
       },
       getMap(map) { // 保存子组件传入的日期索引
         this.scrollMap = map;
-        console.log(this.scrollMap);
+        // console.log(this.scrollMap);
       },
       _getMovie() { // 获取正在上映的电影
         getMovie(this.hotMovieIndex, SEARCH_MORE).then((res) => {
