@@ -153,8 +153,9 @@ better-scroll的github地址戳:[better-scroll](https://github.com/ustbhuangyi/b
 ## 项目布局
 ```
 ├─build                       // webpack配置文件
-├─config                      // 项目开发环境配置相关代码      
-├─screenshots                 // 项目截图
+├─config                      // 项目开发环境配置相关代码   
+├─dist                        // 项目打包目录
+├─screenshots                 // 项目截图
 ├─src                         // 源码目录    
 │  ├─api                      // axios请求，获取项目数据
 │  ├─base                     // 项目基础组件
