@@ -150,6 +150,7 @@ better-scroll 是一个移动端滚动的解决方案，它是基于 iscroll 的
 
 better-scroll的github地址戳:[better-scroll](https://github.com/ustbhuangyi/better-scroll/)
 
+> 如果您不想在项目中使用better-scroll，也可以将相关代码进行替换，如取消一些为了实现scroll组件使用的css的绝对/固定定位，页面的滚动的数据获取采用原生方式获取或使用其他库等，重构成本不会很大。
 ## 项目布局
 ```
 ├─build                       // webpack配置文件
