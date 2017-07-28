@@ -27,7 +27,7 @@
         const week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
         let currentWeek = week[now.getDay()]; // 获取当天星期
         let year = now.getFullYear(); // 当前年
-        let month = now.getMonth(); // 月
+        let month = now.getMonth() + 1; // 月
         let day = now.getDate(); // 日
         return `${year}年${month}月${day}日，${currentWeek}`;
       }
