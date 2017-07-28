@@ -55,15 +55,3 @@ export function getAllComments(id, start, count) {
   });
 }
 
-// 获取影人剧照（测试版本）
-// export function getCastsPhotos(id) {
-//   const url = `/v2/movie/celebrity/1054395/photos`;
-//   const data = Object.assign({}, commonParams);
-//   return axios.get(url, {
-//     params: data
-//   }).then((res) => {
-//     return Promise.resolve(res.data);
-//   }).catch((err) => {
-//     console.log(err);
-//   });
-// }
