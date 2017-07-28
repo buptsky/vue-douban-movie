@@ -84,6 +84,14 @@ function filterDirector(directors) {
 function filterDate(date, pubdates) {
   // 在上映电影列表中出现重映电影的情况
   if (new Date().getTime() > new Date(date).getTime()) { // 如果是重映电影
+    // 判断该重映电影是否为待定日期
+    let reg = /^\d{4}[-]\d{2}[-]\d{2}/;
+    for (let i = 0; i < pubdates.length; i++) {
+      // 如果重映电影的日期数据完整，不需要待定显示
+      if (pubdates[i].indexOf('中国大陆重映') !== -1 && reg.test(pubdates[i])) {
+        return normalizeDate(pubdates[i].match(reg)[0]);
+      }
+    }
     return findShowTime(pubdates, '中国大陆重映');
   }
   if (!date) { // 电影时间不确定，数据为空返回了undefined

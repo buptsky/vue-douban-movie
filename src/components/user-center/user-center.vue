@@ -5,6 +5,7 @@
         <img src="./avatar.jpg" alt=""　width="60" height="60">
       </div>
       <div class="name">豆瓣用户</div>
+      <img :src="text"/>
     </div>
     <switches :switches="switches" :currentIndex="currentIndex"  @switch="switchTab"></switches>
     <scroll class="switch-item" :data="itemLists" ref="scroll">
@@ -40,7 +41,8 @@
           {name: '影人'}
         ],
         itemLists: [],
-        itemLength: 0
+        itemLength: 0,
+        text: ''
       };
     },
     computed: {
