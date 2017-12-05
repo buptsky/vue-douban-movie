@@ -8,7 +8,7 @@
         </div>
         <div class="rank-info" :class="{'compact': !needRank}">
           <div class="info-img">
-            <img v-lazy="item.image" class="" height="100" width="70">
+            <img v-lazy="replaceUrl(item.image)" class="" height="100" width="70">
           </div>
           <div class="info-desc">
             <p class="title">{{item.title}}</p>
@@ -60,6 +60,11 @@
           return;
         }
         this.$emit('select', movie);
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       }
     },
     components: {

@@ -11,7 +11,7 @@
     <scroll class="celebrity-detail" v-if="celebrityDetail.avatars" :data="celebrityDetail">
       <div class="scroll-wrapper">
         <div class="bg-image" ref="image">
-          <img v-lazy="celebrityDetail.avatars.large"/>
+          <img v-lazy="replaceUrl(celebrityDetail.avatars.large)"/>
         </div>
         <div class="celebrity-info">
           <div class="main">
@@ -33,7 +33,7 @@
             <div class="works-content" ref="content">
               <h2 class="title">代表作品</h2>
               <div class="work-item" v-for="item in works" @click="selectWork(item, $event)">
-                <img v-lazy="item.image" width="90" height="120">
+                <img v-lazy="replaceUrl(item.image)" width="90" height="120">
                 <h3 class="item-title">{{item.title}}</h3>
                 <star :score="item.rating" :showScore="showScore"></star>
               </div>
@@ -147,6 +147,11 @@
           });
           this._initPics();
         });
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       },
       _checkCollect() {
         const index = this.collectedCelebrities.findIndex((item) => {

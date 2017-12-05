@@ -7,7 +7,7 @@
       <ul class="suggest-list">
         <li class="suggest-item" v-for="item in result" v-if="item.subtype !== 'tv'" @click="selectItem(item)">
           <div class="item-pic">
-            <img :src="item.image" width="50" height="70">
+            <img :src="replaceUrl(item.image)" width="50" height="70">
           </div>
           <div class="item-info">
             <div class="title">{{item.title}}</div>
@@ -134,6 +134,11 @@
       },
       listScroll() { // 移动端搜索时，键盘防遮挡
         this.$emit('listScroll');
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       },
       _checkMore(data) {
         let movies = data.subjects;

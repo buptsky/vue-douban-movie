@@ -19,7 +19,7 @@
               <span class="brief">8分以上好电影</span>
             </div>
             <div class="rank-img">
-              <img v-for="(item,index) in urlList[0]" :src="item" :class="{'top': index === 1 }"/>
+              <img v-for="(item,index) in urlList[0]" :src="replaceUrl(item)" :class="{'top': index === 1 }"/>
             </div>
           </router-link>
           <router-link tag="div" to="/rank/weekly" class="weekly rank-item">
@@ -28,7 +28,7 @@
               <span class="brief">{{weekDate}}</span>
             </div>
             <div class="rank-img">
-              <img v-for="(item,index) in urlList[1]" :src="item" :class="{'top': index === 1 }"/>
+              <img v-for="(item,index) in urlList[1]" :src="replaceUrl(item)" :class="{'top': index === 1 }"/>
             </div>
           </router-link>
           <router-link tag="div" to="/rank/new-movie" class="new-movie rank-item">
@@ -37,7 +37,7 @@
               <span class="brief">{{weekDate}}</span>
             </div>
             <div class="rank-img">
-              <img v-for="(item,index) in urlList[2]" :src="item" :class="{'top': index === 1 }"/>
+              <img v-for="(item,index) in urlList[2]" :src="replaceUrl(item)" :class="{'top': index === 1 }"/>
             </div>
           </router-link>
           <router-link tag="div" to="/rank/us-box" class="us-box rank-item">
@@ -46,7 +46,7 @@
               <span class="brief">票房最高排名</span>
             </div>
             <div class="rank-img">
-              <img v-for="(item,index) in urlList[3]" :src="item" :class="{'top': index === 1 }"/>
+              <img v-for="(item,index) in urlList[3]" :src="replaceUrl(item)" :class="{'top': index === 1 }"/>
             </div>
           </router-link>
         </div>
@@ -95,6 +95,11 @@
         this.$router.push({
           path: '/search'
         });
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       },
       getUrlList(url) { // 获取处理过的图片集合，各个排行榜数据结构不一致需要处理
         let list = [];

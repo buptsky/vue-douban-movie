@@ -5,7 +5,7 @@
         <div class="date" v-if="needDate && !dateEqual(index)">{{movie.date}}</div>
         <div class="item">
           <div class="info-img">
-            <img v-lazy="movie.image" class="" height="120" width="80">
+            <img v-lazy="replaceUrl(movie.image)" class="" height="120" width="80">
           </div>
           <div class="info-desc">
             <p class="title">{{movie.title}}</p>
@@ -24,6 +24,7 @@
 <script type="text/ecmascript-6">
   import Star from 'base/star/star';
   import Loadmore from 'base/loadmore/loadmore';
+
   export default {
     props: {
       movies: {
@@ -49,8 +50,7 @@
       this.listHeight = [];
       this.indexMap = {};
     },
-    computed: {
-    },
+    computed: {},
     methods: {
       selectItem(movie) {
         this.$emit('select', movie);
@@ -92,6 +92,11 @@
         });
         this.$emit('getHeight', this.listHeight);
         this.$emit('getMap', Object.keys(this.indexMap));
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       }
     },
     watch: {

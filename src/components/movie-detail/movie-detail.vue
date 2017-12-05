@@ -23,7 +23,7 @@
       <div class="scroll-wrapper">
         <div class="scroll-content" v-if="movieDetail.images">
           <div class="bg-image" ref="image">
-            <img v-lazy="movieDetail.images.large"/>
+            <img v-lazy="replaceUrl(movieDetail.images.large)"/>
           </div>
           <movie-info :movieDetail="movieDetail" @selectCelebrity="selectCelebrity"></movie-info>
           <div class="switch">
@@ -119,6 +119,11 @@
         this.$router.push({
           path: `/movie/${this.movieDetail.id}/reviews`
         });
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       },
       scroll(pos) { // 获取页面滚动位置
         this.scrollY = pos.y;

@@ -37,7 +37,7 @@
       <div class="casts-content" ref="content">
         <h2 class="title">影人</h2>
         <div class="cast-item" v-for="item in allCasts" @click="selectCelebrity(item.id,$event)">
-          <img v-lazy="item.avatars.large" width="90" height="120">
+          <img v-lazy="replaceUrl(item.avatars.large)" width="90" height="120">
           <h3 class="item-title">{{item.name}}</h3>
           <span v-if="item.isDirector">导演</span>
         </div>
@@ -146,6 +146,11 @@
           return;
         }
         this.$emit('selectCelebrity', id);
+      },
+      replaceUrl(srcUrl) {
+        if (srcUrl !== undefined) { // 图片防盗链处理
+          return ('https://images.weserv.nl/?url=' + srcUrl.replace(/http\w{0,1}:\/\//, ''));
+        }
       },
       saveWatchedMovie() {
         this.markWatchedMovie(this.movie);
